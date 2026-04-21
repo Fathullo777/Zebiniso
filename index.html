@@ -10,9 +10,11 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
     <header class="hero">
       <div class="hero__inner">
         <h1 class="hero__name">Rasulova Zebiniso</h1>
+        <div id="roleRotator" class="hero__subtitle" data-roles="Operator,Student,Creative" aria-label="Роль"></div>
         <div class="hero__meta">
           <span id="age">20</span> YOSH / <span id="dob">22.06.2006</span>
         </div>
@@ -20,10 +22,20 @@
           <button id="themeToggle" class="action-btn" type="button" aria-pressed="false" title="Переключить тему">
             Theme
           </button>
+          <button id="langBtn" class="action-btn" type="button" title="Language">
+            RU
+          </button>
+          <button id="accentBtn" class="action-btn" type="button" title="Сменить цвет">
+            Color
+          </button>
+          <button id="qrBtn" class="action-btn" type="button" title="QR код">
+            QR
+          </button>
           <button id="printBtn" class="action-btn action-btn--primary" type="button" title="Сохранить в PDF">
             PDF
           </button>
         </div>
+        <div class="hero__stats"><span id="visits" class="hero__visits"></span></div>
       </div>
     </header>
 
@@ -53,39 +65,49 @@
             </svg>
           </div>
 
-          <div class="left-block">
-            <h2 class="left-title">ALOQA</h2>
+          <div class="photo-actions">
+            <input id="photoInput" class="photo-input" type="file" accept="image/*" />
+            <button id="photoBtn" class="photo-btn" type="button" data-i18n="upload_photo">Upload photo</button>
+          </div>
+
+          <div class="left-block" id="aloqa">
+            <h2 class="left-title" data-i18n="section_contact">ALOQA</h2>
             <div class="left-item">
-              <div class="left-label">Phone number:</div>
-              <div class="left-value"><a class="contact-link" href="tel:+9988887877520" data-copy="+9988887877520">+998 88 878 75 20</a></div>
+              <div class="left-label" data-i18n="label_phone">Phone number:</div>
+              <div class="left-value"><a class="contact-link" href="tel:+998888787520" data-copy="+998888787520">+998 88 878 75 20</a></div>
             </div>
             <div class="left-item">
-              <div class="left-label">Email:</div>
+              <div class="left-label" data-i18n="label_email">Email:</div>
               <div class="left-value"><a class="contact-link" href="mailto:sollasas61@gmail.com" data-copy="sollasas61@gmail.com">sollasas61@gmail.com</a></div>
             </div>
             <div class="left-item">
-              <div class="left-label">Address:</div>
+              <div class="left-label" data-i18n="label_address">Address:</div>
               <div class="left-value">Yangiyul shahar</div>
+            </div>
+
+            <div class="left-actions">
+              <button id="vcardBtn" class="left-btn" type="button" data-i18n="save_contact">Save contact</button>
+              <button id="shareBtn" class="left-btn left-btn--primary" type="button" data-i18n="share">Share</button>
             </div>
           </div>
 
-          <div class="left-block left-block--spaced">
-            <h2 class="left-title">LINKLAR</h2>
+          <div class="left-block left-block--spaced" id="linklar">
+            <h2 class="left-title" data-i18n="section_links">LINKLAR</h2>
             <div class="left-item">
-              <div class="left-label">Telegram:</div>
+              <div class="left-label" data-i18n="label_telegram">Telegram:</div>
               <div class="left-value"><a class="contact-link" href="" target="_blank" rel="noreferrer" data-copy="">------------</a></div>
             </div>
             <div class="left-item">
-              <div class="left-label">Instagram:</div>
+              <div class="left-label" data-i18n="label_instagram">Instagram:</div>
               <div class="left-value"><a class="contact-link" href="https://www.instagram.com/qirxxn.x/" target="_blank" rel="noreferrer" data-copy="@qirxxn.x">@qirxxn.x</a></div>
             </div>
           </div>
         </div>
 
         <div class="card__right">
-          <div class="section">
+          <div class="section" id="experience">
             <div class="section__head">
-              <h3 class="section__title">ISH TAJRIBASI</h3>
+              <h3 class="section__title" data-i18n="section_experience">ISH TAJRIBASI</h3>
               <div class="section__rule"></div>
             </div>
 
@@ -100,9 +122,9 @@
             </div>
           </div>
 
-          <div class="section">
+          <div class="section" id="education">
             <div class="section__head">
-              <h3 class="section__title">TALIM</h3>
+              <h3 class="section__title" data-i18n="section_education">TALIM</h3>
               <div class="section__rule"></div>
             </div>
 
@@ -115,16 +137,25 @@
             </div>
           </div>
 
-          <div class="section">
+          <div class="section" id="languages">
             <div class="section__head">
-              <h3 class="section__title">TIL</h3>
+              <h3 class="section__title" data-i18n="section_languages">TIL</h3>
               <div class="section__rule"></div>
             </div>
 
             <div class="lang">
-              <div class="lang__row"><span class="lang__name">Uzbk:</span> Ona tili</div>
-              <div class="lang__row"><span class="lang__name">Russian:</span> C1 </div>
-              <div class="lang__row"><span class="lang__name">English:</span> Intermidiate </div>
+              <div class="lang__item" data-level="100">
+                <div class="lang__top"><span class="lang__name">Uzbk</span><span class="lang__level">Ona tili</span></div>
+                <div class="lang__bar"><span class="lang__fill"></span></div>
+              </div>
+              <div class="lang__item" data-level="85">
+                <div class="lang__top"><span class="lang__name">Russian</span><span class="lang__level">C1</span></div>
+                <div class="lang__bar"><span class="lang__fill"></span></div>
+              </div>
+              <div class="lang__item" data-level="55">
+                <div class="lang__top"><span class="lang__name">English</span><span class="lang__level">Intermediate</span></div>
+                <div class="lang__bar"><span class="lang__fill"></span></div>
+              </div>
             </div>
           </div>
 
@@ -138,6 +169,29 @@
       </section>
     </main>
 
+    <nav class="bottom-nav" aria-label="Навигация">
+      <a class="bottom-nav__item" href="#aloqa" data-target="aloqa" data-i18n="nav_contact">Aloqa</a>
+      <a class="bottom-nav__item" href="#experience" data-target="experience" data-i18n="nav_experience">Ish</a>
+      <a class="bottom-nav__item" href="#education" data-target="education" data-i18n="nav_education">Talim</a>
+      <a class="bottom-nav__item" href="#languages" data-target="languages" data-i18n="nav_languages">Til</a>
+    </nav>
+
+    <div id="qrModal" class="modal" aria-hidden="true">
+      <div class="modal__backdrop" data-close="true"></div>
+      <div class="modal__panel" role="dialog" aria-modal="true" aria-label="QR код">
+        <div class="modal__head">
+          <div class="modal__title" data-i18n="qr_title">QR code</div>
+          <button id="qrClose" class="modal__close" type="button" aria-label="Закрыть">×</button>
+        </div>
+        <div class="modal__body">
+          <img id="qrImg" class="qr" alt="QR" />
+          <div id="qrLink" class="modal__link"></div>
+          <button id="qrCopy" class="left-btn left-btn--primary" type="button" data-i18n="copy_link">Copy link</button>
+        </div>
+      </div>
+    </div>
+
+    <button id="toTop" class="to-top" type="button" aria-label="Наверх" title="Наверх" data-i18n="top">Top</button>
     <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
     <script src="script.js"></script>
   </body>
