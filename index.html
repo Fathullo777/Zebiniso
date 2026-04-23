@@ -10,30 +10,28 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div id="cursorGlow" class="cursor-glow" aria-hidden="true"></div>
     <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
     <header class="hero">
+      <canvas id="particles" class="particles" aria-hidden="true"></canvas>
       <div class="hero__inner">
-        <h1 class="hero__name">Rasulova Zebiniso</h1>
-        <div id="roleRotator" class="hero__subtitle" data-roles="Operator,Student,Creative" aria-label="Роль"></div>
+        <h1 class="hero__name"><span class="hero__name-text">Rasulova Zebiniso</span><span class="status-dot" data-i18n="status_online" title="Online">●</span></h1>
+        <div id="roleRotator" class="hero__subtitle" data-roles="role_operator,role_student,role_creative" aria-label="Роль"></div>
         <div class="hero__meta">
-          <span id="age">20</span> YOSH / <span id="dob">22.06.2006</span>
+          <span id="age">20</span> <span data-i18n="age_suffix">YOSH</span> / <span id="dob">22.06.2006</span>
+          <div class="hero__location" id="heroLocation">
+            <span class="loc-icon">📍</span> <span data-i18n="location">Tashkent, Uzbekistan</span>
+            <span class="loc-time" id="localTime">00:00</span>
+          </div>
         </div>
         <div class="actions" aria-label="Действия">
-          <button id="themeToggle" class="action-btn" type="button" aria-pressed="false" title="Переключить тему">
-            Theme
-          </button>
-          <button id="langBtn" class="action-btn" type="button" title="Language">
-            RU
-          </button>
-          <button id="accentBtn" class="action-btn" type="button" title="Сменить цвет">
-            Color
-          </button>
-          <button id="qrBtn" class="action-btn" type="button" title="QR код">
-            QR
-          </button>
-          <button id="printBtn" class="action-btn action-btn--primary" type="button" title="Сохранить в PDF">
-            PDF
-          </button>
+          <div class="tip-wrap"><button id="themeToggle" class="action-btn" type="button" aria-pressed="false" data-i18n-attr="title:tip_theme">Theme</button><span class="tip" data-i18n="tip_theme">Toggle theme</span></div>
+          <div class="tip-wrap"><button id="langBtn" class="action-btn" type="button" data-i18n-attr="title:tip_lang">RU</button><span class="tip" data-i18n="tip_lang">Switch language</span></div>
+          <div class="tip-wrap"><button id="accentBtn" class="action-btn" type="button" data-i18n-attr="title:tip_color">Color</button><span class="tip" data-i18n="tip_color">Change accent</span></div>
+          <div class="tip-wrap"><button id="qrBtn" class="action-btn" type="button" data-i18n-attr="title:tip_qr">QR</button><span class="tip" data-i18n="tip_qr">Show QR code</span></div>
+          <div class="tip-wrap"><button id="printBtn" class="action-btn action-btn--primary" type="button" data-i18n-attr="title:tip_pdf">PDF</button><span class="tip" data-i18n="tip_pdf">Save as PDF</span></div>
+          <div class="tip-wrap"><button id="ttsBtn" class="action-btn" type="button" data-i18n-attr="title:tip_tts">🔊</button><span class="tip" data-i18n="tip_tts">Read aloud</span></div>
+          <div class="tip-wrap"><button id="adminBtn" class="action-btn" type="button" data-i18n-attr="title:tip_admin">⚙</button><span class="tip" data-i18n="tip_admin">Admin panel</span></div>
         </div>
         <div class="hero__stats"><span id="visits" class="hero__visits"></span></div>
       </div>
@@ -41,8 +39,10 @@
 
     <main class="page">
       <section class="card">
+        <div class="card-spotlight" aria-hidden="true"></div>
         <div class="card__left">
-          <div class="avatar" aria-label="Фото">
+          <div class="avatar" id="avatarDrop" aria-label="Фото">
+            <div class="avatar__drop" data-i18n="drop_photo" aria-hidden="true">Drop photo</div>
             <svg viewBox="0 0 260 260" class="avatar__svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <defs>
                 <clipPath id="clip">
@@ -65,9 +65,13 @@
             </svg>
           </div>
 
-          <div class="photo-actions">
-            <input id="photoInput" class="photo-input" type="file" accept="image/*" />
-            <button id="photoBtn" class="photo-btn" type="button" data-i18n="upload_photo">Upload photo</button>
+          <div class="profile-ring-wrap">
+            <svg class="profile-ring" viewBox="0 0 48 48">
+              <circle class="profile-ring__bg" cx="24" cy="24" r="20" />
+              <circle id="profileRingFill" class="profile-ring__fill" cx="24" cy="24" r="20" />
+            </svg>
+            <span class="profile-ring__text" id="profileRingText">75%</span>
+            <span class="profile-ring__label" data-i18n="profile_complete">Complete</span>
           </div>
 
           <div class="left-block" id="aloqa">
@@ -112,13 +116,13 @@
             </div>
 
             <div class="job">
-              <div class="job__role">Operator</div>
-              <div class="job__desc">Wellness Group Company / Tashkent / 2025 - 2026</div>
+              <div class="job__role" data-i18n="job_role_1">Operator</div>
+              <div class="job__desc" data-i18n="job_desc_1">Wellness Group Company / Tashkent / 2025 - 2026</div>
             </div>
 
             <div class="job job--spaced">
-              <div class="job__role"></div>
-              <div class="job__desc"></div>
+              <div class="job__role" data-i18n="job_role_2">Student</div>
+              <div class="job__desc" data-i18n="job_desc_2">Education Period / 2013 - 2024</div>
             </div>
           </div>
 
@@ -130,10 +134,10 @@
 
             <div class="edu">
               <div class="edu__left">
-                <div class="edu__school">10-Maktab</div>
-                <div class="edu__years">2013 - 2024</div>
+                <div class="edu__school" data-i18n="edu_school">10-Maktab</div>
+                <div class="edu__years" data-i18n="edu_years">2013 - 2024</div>
               </div>
-              <div class="edu__right">Studied in the University of Since and Technologies<br />Architecture</div>
+              <div class="edu__right" data-i18n="edu_desc">Studied in the University of Since and Technologies<br />Architecture</div>
             </div>
           </div>
 
@@ -145,17 +149,55 @@
 
             <div class="lang">
               <div class="lang__item" data-level="100">
-                <div class="lang__top"><span class="lang__name">Uzbek</span><span class="lang__level">Ona tili</span></div>
+                <div class="lang__top"><span class="lang__name" data-i18n="lang_uzbek">Uzbek</span><span class="lang__level" data-i18n="lang_level_native">Ona tili</span></div>
                 <div class="lang__bar"><span class="lang__fill"></span></div>
               </div>
               <div class="lang__item" data-level="85">
-                <div class="lang__top"><span class="lang__name">Russian</span><span class="lang__level">C1</span></div>
+                <div class="lang__top"><span class="lang__name" data-i18n="lang_russian">Russian</span><span class="lang__level" data-i18n="lang_level_c1">C1</span></div>
                 <div class="lang__bar"><span class="lang__fill"></span></div>
               </div>
               <div class="lang__item" data-level="55">
-                <div class="lang__top"><span class="lang__name">English</span><span class="lang__level">Intermediate</span></div>
+                <div class="lang__top"><span class="lang__name" data-i18n="lang_english">English</span><span class="lang__level" data-i18n="lang_level_intermediate">Intermediate</span></div>
                 <div class="lang__bar"><span class="lang__fill"></span></div>
               </div>
+            </div>
+          </div>
+
+          <div class="section" id="skills">
+            <div class="section__head">
+              <h3 class="section__title" data-i18n="section_skills">SKILLS</h3>
+              <div class="section__rule"></div>
+            </div>
+            <div class="skills">
+              <span class="skill-tag" data-i18n="skill_communication">Communication</span>
+              <span class="skill-tag" data-i18n="skill_teamwork">Teamwork</span>
+              <span class="skill-tag" data-i18n="skill_problem">Problem Solving</span>
+              <span class="skill-tag" data-i18n="skill_time">Time Management</span>
+              <span class="skill-tag" data-i18n="skill_office">MS Office</span>
+              <span class="skill-tag" data-i18n="skill_data">Data Entry</span>
+              <span class="skill-tag" data-i18n="skill_service">Customer Service</span>
+              <span class="skill-tag" data-i18n="skill_adaptability">Adaptability</span>
+            </div>
+          </div>
+
+          <div class="section" id="highlights">
+            <div class="section__head">
+              <h3 class="section__title" data-i18n="section_highlights">HIGHLIGHTS</h3>
+              <div class="section__rule"></div>
+            </div>
+            <div class="hl-filters" role="tablist" aria-label="Highlights filters">
+              <button class="hl-filter hl-filter--active" type="button" data-filter="all" data-i18n="hl_all">All</button>
+              <button class="hl-filter" type="button" data-filter="soft" data-i18n="hl_soft">Soft</button>
+              <button class="hl-filter" type="button" data-filter="hard" data-i18n="hl_hard">Hard</button>
+              <button class="hl-filter" type="button" data-filter="cert" data-i18n="hl_cert">Cert</button>
+            </div>
+            <div class="hl-grid" id="hlGrid">
+              <div class="hl-badge" data-cat="soft"><span class="hl-dot"></span><span class="hl-text" data-i18n="hl_1">Fast learner</span></div>
+              <div class="hl-badge" data-cat="soft"><span class="hl-dot"></span><span class="hl-text" data-i18n="hl_2">Stress resistant</span></div>
+              <div class="hl-badge" data-cat="hard"><span class="hl-dot"></span><span class="hl-text" data-i18n="hl_3">Excel / Google Sheets</span></div>
+              <div class="hl-badge" data-cat="hard"><span class="hl-dot"></span><span class="hl-text" data-i18n="hl_4">Customer support</span></div>
+              <div class="hl-badge" data-cat="cert"><span class="hl-dot"></span><span class="hl-text" data-i18n="hl_5">English level: Intermediate</span></div>
+              <div class="hl-badge" data-cat="cert"><span class="hl-dot"></span><span class="hl-text" data-i18n="hl_6">Office skills certified</span></div>
             </div>
           </div>
 
@@ -174,6 +216,7 @@
       <a class="bottom-nav__item" href="#experience" data-target="experience" data-i18n="nav_experience">Ish</a>
       <a class="bottom-nav__item" href="#education" data-target="education" data-i18n="nav_education">Talim</a>
       <a class="bottom-nav__item" href="#languages" data-target="languages" data-i18n="nav_languages">Til</a>
+      <a class="bottom-nav__item" href="#skills" data-target="skills" data-i18n="nav_skills">Skills</a>
     </nav>
 
     <div id="qrModal" class="modal" aria-hidden="true">
@@ -192,6 +235,52 @@
     </div>
 
     <button id="toTop" class="to-top" type="button" aria-label="Наверх" title="Наверх" data-i18n="top">Top</button>
+    <canvas id="confetti" class="confetti" aria-hidden="true"></canvas>
+    <div id="hotkeysModal" class="modal" aria-hidden="true">
+      <div class="modal__backdrop" data-close="true"></div>
+      <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Hotkeys">
+        <div class="modal__head">
+          <div class="modal__title" data-i18n="hotkeys_title">Keyboard shortcuts</div>
+          <button class="modal__close" data-close-hotkeys type="button" aria-label="Close">×</button>
+        </div>
+        <div class="modal__body hotkeys-body">
+          <div class="hk-row"><kbd>T</kbd><span data-i18n="hk_theme">Toggle theme</span></div>
+          <div class="hk-row"><kbd>P</kbd><span data-i18n="hk_pdf">Save PDF</span></div>
+          <div class="hk-row"><kbd>S</kbd><span data-i18n="hk_share">Share</span></div>
+          <div class="hk-row"><kbd>L</kbd><span data-i18n="hk_lang">Switch language</span></div>
+          <div class="hk-row"><kbd>C</kbd><span data-i18n="hk_color">Change accent</span></div>
+          <div class="hk-row"><kbd>Q</kbd><span data-i18n="hk_qr">QR code</span></div>
+          <div class="hk-row"><kbd>?</kbd><span data-i18n="hk_help">This panel</span></div>
+        </div>
+      </div>
+    </div>
+    <div id="adminModal" class="modal" aria-hidden="true">
+      <div class="modal__backdrop" data-close="true"></div>
+      <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Admin">
+        <div class="modal__head">
+          <div class="modal__title" data-i18n="admin_title">Admin Panel</div>
+          <button id="adminClose" class="modal__close" type="button" aria-label="Close">×</button>
+        </div>
+        <div class="modal__body admin-body">
+          <div id="adminLogin">
+            <label class="admin-label" data-i18n="admin_password_label">Enter password:</label>
+            <input id="adminPass" class="admin-input" type="password" autocomplete="off" placeholder="••••••••" />
+            <button id="adminLoginBtn" class="left-btn left-btn--primary" type="button" data-i18n="admin_login">Login</button>
+            <div id="adminError" class="admin-error"></div>
+          </div>
+          <div id="adminPanel" style="display:none">
+            <p class="admin-info" data-i18n="admin_edit_info">Click any text on the resume to edit it. Changes are saved automatically.</p>
+            <div class="admin-actions-grid">
+              <button id="adminPhotoBtn" class="left-btn" type="button" data-i18n="admin_change_photo">Change photo</button>
+              <input id="adminPhotoInput" type="file" accept="image/*" style="display:none" />
+              <button id="adminToggleEditBtn" class="left-btn" type="button" data-i18n="admin_toggle_edit">Edit profile</button>
+              <button id="adminSaveBtn" class="left-btn left-btn--primary" type="button" data-i18n="admin_save">Save all</button>
+              <button id="adminLogoutBtn" class="left-btn" type="button" data-i18n="admin_logout">Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
     <script src="script.js"></script>
   </body>
